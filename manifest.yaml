@@ -47,9 +47,9 @@ spec:
               --secret-id roboshop/dev/mysql_root_password \
               --query 'SecretString' \
               --output text \
-            | jq -r '.["mysql-password"]' > /secrets/mysql-root-password.txt && \
+            | jq -r '.["mysql-password"]' > /tmp/mysql-root-password.txt && \
             echo "Secret written successfully" && \
-            cat /secrets/mysql-root-password.txt    # verify content
+            cat /tmp/mysql-root-password.txt    # verify content
         volumeMounts:
         - name: mysql-secret
           mountPath: /tmp

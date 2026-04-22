@@ -47,12 +47,12 @@ spec:
               --secret-id roboshop/dev/mysql_root_password \
               --query 'SecretString' \
               --output text \
-            | jq -r '.["MYSQL_ROOT_PASSWORD"]' > /tmp/mysql-root-password.txt && \
+            | jq -r '.["MYSQL_ROOT_PASSWORD"]' > /secrets/mysql-root-password.txt && \
             echo "Secret written successfully" && \
-            cat /tmp/mysql-root-password.txt    # verify content
+            cat /secrets/mysql-root-password.txt    # verify content
         volumeMounts:
         - name: mysql-secret
-          mountPath: /tmp
+          mountPath: /secrets
       containers:
       - name: mysql
         image: joindevops/mysql:1.3.0
@@ -62,7 +62,7 @@ spec:
         #   mountPath: /etc/mysql/conf.d/my.cnf
         #   subPath: my.cnf
         - name: mysql-secret
-          mountPath: /tmp
+          mountPath: /secrets
       volumes:
         # - name: mysql-config
         #   configMap:
